@@ -34,3 +34,15 @@
     - name: "Permitir conexion md5 para el usuario de la base de datos"
       postgresql_pg_hba:
         dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: md5
+        users: "{{ db_user }}"
+        create: true
+      become: yes
+      become_user: postgres
+      notify: restart postgres
+
+  handlers:
+    - name: restart postgres
+      service: name=postgresql state=restarted
