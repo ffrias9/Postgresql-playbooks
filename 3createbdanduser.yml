@@ -1,0 +1,36 @@
+---
+- hosts: postgresql-nodes
+  become: yes
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: "Crear base de datos"
+      postgresql_db:
+        state: present
+        name: "{{ db_name }}"
+      become: yes
+      become_user: postgres
+
+    - name: "Crear usuario de la base de datos"
+      postgresql_user:
+        state: present
+        name: "{{ db_user }}"
+        password: "{{ db_password }}"
+      become: yes
+      become_user: postgres
+
+    - name: "Conceder acceso a la base de datos al usuario"
+      postgresql_privs:
+        type: database
+        database: "{{ db_name }}"
+        roles: "{{ db_user }}"
+        grant_option: no
+        privs: all
+      become: yes
+      become_user: postgres
+
+    - name: "Permitir conexion md5 para el usuario de la base de datos"
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"

@@ -1,0 +1,3 @@
+ db_user: root
+ db_password: toor
+ db_name: database1

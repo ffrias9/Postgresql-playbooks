@@ -1,0 +1,21 @@
+---
+- hosts: postgresql-nodes
+  become: yes
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: "Check PostgreSQL"
+      ansible.builtin.stat:
+        path: "/var/lib/pgsql/data/pg_hba.conf"
+      register: postgres_data
+
+    - name: "Inicializar PostgreSQL"
+      shell: "postgresql-setup initdb"
+      when: not postgres_data.stat.exists
+
+    - name: "Iniciar y habilitar servicios"
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - postgresql
