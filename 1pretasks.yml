@@ -3,6 +3,11 @@
   become: yes
 
   pre_tasks:
+    - name: "Instalar dnf"
+      yum: "name={{ item }} state=present"
+      with_items:
+        - dnf
+
     - name: "Instalar paquetes necesarios"
       dnf: "name={{ item }} state=present"
       with_items:
@@ -14,19 +19,11 @@
         - python3-devel
         - postgresql-devel
 
-    - name: "Repositorio 1"
-      shell: sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E '%{rhel}').noarch.$
-
     - name: "Reinstalar epel-release"
       shell: sudo yum reinstall -y  epel-release
-
-    - name: "Reinstalar python"
-      shell: sudo yum reinstall -y python-pip
-
-    - name: "Repositorio 2"
-      shell: sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-l$
 
     - name: "Instalar paquetes de Python"
       yum: "name={{ item }} state=present"
       with_items:
         - python-psycopg2
+        - nano
