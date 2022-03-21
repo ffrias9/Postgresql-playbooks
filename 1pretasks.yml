@@ -3,10 +3,11 @@
   become: yes
 
   pre_tasks:
-    - name: "Instalar dnf"
+    - name: "Instalar dnf & nano"
       yum: "name={{ item }} state=present"
       with_items:
         - dnf
+        - nano
 
     - name: "Instalar paquetes necesarios"
       dnf: "name={{ item }} state=present"
@@ -26,4 +27,3 @@
       yum: "name={{ item }} state=present"
       with_items:
         - python-psycopg2
-        - nano
