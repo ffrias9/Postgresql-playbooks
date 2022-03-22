@@ -2,5 +2,5 @@
  db_password: toor
  db_name: database1
  #insert-data
- file: /tmp/nombrearchivo.sql
+ file: /tmp/
  dest: /tmp/
