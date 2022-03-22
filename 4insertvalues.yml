@@ -6,14 +6,15 @@
     - vars.yml
 
   tasks:
+    - name: "Copiar backup al servidor"
+      copy:
+        src: "{{ sqlfile }}/nombrearchivo.sql"
+        dest: "{{ dest }}"
+
     - name: "Conceder permisos a file.sql"
-      shell: sudo chmod -R a+rwX /tmp/prueba.sql
+      shell: sudo chmod -R a+rwX /tmp/nombrearchivo.sql
 
     - name: "Importar datos a la base de datos desde un .sql"
       become: true
       become_user: postgres
-      shell: psql {{ db_name }} < /tmp/prueba.sql
-
-  handlers:
-    - name: restart postgres
-      service: name=postgresql state=restarted
+      shell: psql {{ db_name }} < /tmp/nombrearchivo.sql
