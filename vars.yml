@@ -2,5 +2,5 @@
  db_password: toor
  db_name: database1
  #insert-data
- file: /home/ansible/postgresql/sqlfiles/nombrearchivo.sql
-dest: /tmp/
+ file: /tmp/nombrearchivo.sql
+ dest: /tmp/
