@@ -8,7 +8,7 @@
   tasks:
     - name: "Copiar archivo .sql al servidor"
       copy:
-        src: "{{ sqlfile }}/nombrearchivo.sql"
+        src: "{{ file }}/nombrearchivo.sql"
         dest: "{{ dest }}"
 
     - name: "Conceder permisos al archivo .sql"
