@@ -14,7 +14,7 @@
         - postgresql
         - postgresql-server
         - python3
-        - python
+        - python2
         - python3-devel
         - python3-devel
         - postgresql-devel
@@ -25,4 +25,4 @@
     - name: "Instalar paquetes de Python"
       yum: "name={{ item }} state=present"
       with_items:
-        - python-psycopg2
+        - python3-psycopg2
