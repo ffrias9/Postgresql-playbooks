@@ -8,13 +8,13 @@
   tasks:
     - name: "Copiar archivo .sql al servidor"
       copy:
-        src: "{{ file }}/nombrearchivo.sql"
+        src: "{{ file }}/prueba.sql"
         dest: "{{ dest }}"
 
     - name: "Conceder permisos al archivo .sql"
-      shell: sudo chmod -R a+rwX /tmp/nombrearchivo.sql
+      shell: sudo chmod -R a+rwX /tmp/prueba.sql
 
     - name: "Importar datos a la base de datos desde el archivo .sql"
       become: true
       become_user: postgres
-      shell: psql {{ db_name }} < /tmp/nombrearchivo.sql
+      shell: psql {{ db_name }} < /tmp/prueba.sql
